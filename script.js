@@ -47,14 +47,11 @@ await addDoc(
 collection(db,"messages"),
 
 {
+    text: message,
 
+    receiver: receiver,
 
-text: message,
-
-
-time: serverTimestamp()
-
-
+    time: serverTimestamp()
 }
 
 );
