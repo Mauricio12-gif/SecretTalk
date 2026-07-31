@@ -1,36 +1,31 @@
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
 
-
 import { getFirestore } from 
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 
-
 const firebaseConfig = {
 
-apiKey: "AIzaSyDWoOntz_Xgz1nxgSwjg9M86WmtJfn9Bmo",
+apiKey: "AIzaSyBddxUw5KyerputaYh_18LITHNv7hlYKFk",
 
-authDomain: "secrettalk-d6fe6.firebaseapp.com",
+authDomain: "secrettalk-16d0c.firebaseapp.com",
 
-projectId: "secrettalk-d6fe6",
+projectId: "secrettalk-16d0c",
 
-storageBucket: "secrettalk-d6fe6.firebasestorage.app",
+storageBucket: "secrettalk-16d0c.firebasestorage.app",
 
-messagingSenderId: "273110228571",
+messagingSenderId: "406309368955",
 
-appId: "1:273110228571:web:5ffc4fa713c4b6fc9fa97e"
+appId: "1:406309368955:web:dd763364724ebc54d15ede"
 
 };
-
 
 
 const app = initializeApp(firebaseConfig);
 
 
-
 const db = getFirestore(app);
-
 
 
 export { db };
