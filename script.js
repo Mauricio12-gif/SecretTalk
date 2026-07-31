@@ -23,6 +23,7 @@ const status = document.getElementById("status");
 
 
 const message = messageBox.value.trim();
+  const receiver = "Mauricio";
 
 
 
