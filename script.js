@@ -1,4 +1,11 @@
 import { db } from "./firebase.js";
+const params = new URLSearchParams(window.location.search);
+
+const receiver = params.get("user") || "Mauricio";
+
+
+document.getElementById("receiverName").innerHTML =
+"Sending message to: " + receiver;
 
 
 import {
@@ -23,7 +30,7 @@ const status = document.getElementById("status");
 
 
 const message = messageBox.value.trim();
-  const receiver = "Mauricio";
+  
 
 
 
