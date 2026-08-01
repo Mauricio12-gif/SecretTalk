@@ -52,4 +52,5 @@ border-radius:15px;
 </div>  `;
 
 });
-  
+
+});
