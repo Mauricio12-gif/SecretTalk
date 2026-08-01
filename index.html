@@ -21,11 +21,13 @@
 <h1>💬 SecretTalk</h1>
 
 
-<p>
-Send an anonymous message
-</p>
+<!-- SEND MESSAGE -->
 
-<h3 id="receiverName"></h3>
+<div id="sendSection">
+
+<h3 id="receiverName">
+Send an anonymous message
+</h3>
 
 
 <textarea 
@@ -35,11 +37,42 @@ placeholder="Write your message...">
 
 
 <button onclick="sendMessage()">
-Send
+Send ❤️
 </button>
 
 
 <p id="status"></p>
+
+</div>
+
+
+
+<hr>
+
+
+
+<!-- CREATE LINK -->
+
+<div id="createSection">
+
+
+<h2>Create your own SecretTalk link</h2>
+
+
+<input 
+id="username"
+placeholder="Enter your username">
+
+
+<button onclick="createLink()">
+Generate Link
+</button>
+
+
+<p id="result"></p>
+
+
+</div>
 
 
 </div>
