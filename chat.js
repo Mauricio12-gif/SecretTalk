@@ -5,6 +5,7 @@ import {
 collection,
 query,
 where,
+orderBy,
 onSnapshot,
 addDoc,
 serverTimestamp
@@ -24,26 +25,40 @@ const conversationId = params.get("conversation");
 const anonymousId = params.get("anonymous");
 
 const receiver = params.get("user");
+
 const mode = params.get("mode");
 
-let senderName;
 
+
+let senderName;
+let receiverName;
+
+
+
+// DECIDE WHO IS CHATTING
 
 if(mode === "anonymous"){
 
 senderName = anonymousId;
+
+receiverName = receiver;
 
 }
 else{
 
 senderName = receiver;
 
+receiverName = anonymousId;
+
 }
 
 
 
+
+
 document.getElementById("chatTitle").innerHTML =
-anonymousId || "Anonymous";
+"Chat with " + receiverName;
+
 
 
 
@@ -54,7 +69,9 @@ const messagesQuery = query(
 
 collection(db,"messages"),
 
-where("conversationId","==",conversationId)
+where("conversationId","==",conversationId),
+
+orderBy("time","asc")
 
 );
 
@@ -70,20 +87,24 @@ document.getElementById("chatMessages");
 chatBox.innerHTML = "";
 
 
+
 snapshot.forEach((doc)=>{
 
 
 const data = doc.data();
 
 
-const mine = data.sender === senderName;
+
+const mine =
+data.sender === senderName;
 
 
 
 chatBox.innerHTML += `
 
 <div style="
-text-align:${mine ? "right" : "left"};
+display:flex;
+justify-content:${mine ? "flex-end" : "flex-start"};
 margin:10px;
 ">
 
@@ -92,14 +113,13 @@ margin:10px;
 background:${mine ? "#d1ffd6" : "#ffeef5"};
 padding:12px;
 border-radius:15px;
-display:inline-block;
+max-width:70%;
 ">
 
 
+<p style="margin:0;">
 ${data.text}
-
-
-<br>
+</p>
 
 
 <small>
@@ -119,7 +139,9 @@ ${data.sender}
 });
 
 
+
 });
+
 
 
 
@@ -152,22 +174,29 @@ await addDoc(
 collection(db,"messages"),
 
 {
+
 text: reply,
+
 
 sender: senderName,
 
-receiver: anonymousId,
+
+receiver: receiverName,
+
 
 conversationId: conversationId,
 
+
 time: serverTimestamp()
 
-  }
+}
 
 );
 
 
-replyBox.value="";
+
+replyBox.value = "";
+
 
 
 };
