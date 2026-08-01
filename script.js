@@ -14,6 +14,27 @@ import {
 const params = new URLSearchParams(window.location.search);
 
 const receiver = params.get("user") || "Mauricio";
+// CREATE ANONYMOUS ID
+
+let anonymousId = localStorage.getItem("anonymousId");
+
+
+if(!anonymousId){
+
+anonymousId =
+"Anonymous #" +
+Math.floor(1000 + Math.random() * 9000);
+
+
+localStorage.setItem(
+"anonymousId",
+anonymousId
+);
+
+}
+
+
+console.log("Anonymous identity:", anonymousId);
 
 
 
