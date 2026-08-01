@@ -183,3 +183,10 @@ document.getElementById("messages").innerHTML =
 
 
 });
+window.logout = async function(){
+
+await signOut(auth);
+
+window.location.href = "home.html";
+
+};
