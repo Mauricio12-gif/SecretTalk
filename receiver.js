@@ -183,10 +183,8 @@ document.getElementById("messages").innerHTML =
 
 
 });
-window.logout = async function(){
+window.logout = function(){
 
-await signOut(auth);
-
-window.location.href = "home.html";
+alert("Logout works");
 
 };
