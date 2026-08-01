@@ -1,89 +1,229 @@
-import { db } from "./firebase.js";
-
-
-import {
-collection,
-addDoc,
-serverTimestamp
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
 }
-from
-"https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 
+body{
 
-window.createAccount = async function(){
+    margin:0;
 
+    min-height:100vh;
 
-const username =
-document.getElementById("username").value.trim();
+    background:linear-gradient(
+        135deg,
+        #ffe6f2,
+        #f7d8ff
+    );
 
+    display:flex;
 
-const password =
-document.getElementById("password").value.trim();
+    justify-content:center;
 
+    align-items:center;
 
-
-const status =
-document.getElementById("status");
-
-
-
-if(username === "" || password === ""){
-
-status.innerHTML =
-"Fill all fields";
-
-return;
+    color:#4a214f;
 
 }
 
 
 
-try{
+.container{
 
+    width:90%;
 
-await addDoc(
+    max-width:420px;
 
-collection(db,"users"),
+    background:white;
 
-{
+    padding:30px;
 
-username: username,
+    border-radius:25px;
 
-password: password,
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
 
-createdAt: serverTimestamp()
-
-}
-
-);
-
-
-
-status.innerHTML =
-"Account created ❤️";
-
-
-
-setTimeout(()=>{
-
-window.location.href =
-"login.html";
-
-},1500);
-
-
-
-}
-
-catch(error){
-
-console.log(error);
-
-status.innerHTML =
-error.message;
+    text-align:center;
 
 }
 
 
-};
+
+h1{
+
+    color:#d63384;
+
+    margin-bottom:10px;
+
+}
+
+
+
+h2{
+
+    color:#9b4dca;
+
+}
+
+
+
+p{
+
+    color:#666;
+
+    line-height:1.5;
+
+}
+
+
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:10px 0;
+
+    border-radius:15px;
+
+    border:1px solid #f3b6d2;
+
+    outline:none;
+
+    font-size:16px;
+
+}
+
+
+
+input:focus,
+textarea:focus{
+
+    border-color:#d63384;
+
+}
+
+
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:8px 0;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        135deg,
+        #d63384,
+        #9b4dca
+    );
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    opacity:0.9;
+
+}
+
+
+
+.link-box{
+
+    background:#fff0f7;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    margin:20px 0;
+
+}
+
+
+
+#myLink{
+
+    word-break:break-word;
+
+    background:white;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    color:#9b4dca;
+
+}
+
+
+
+.message-card{
+
+    background:#fff0f7;
+
+    padding:18px;
+
+    margin:15px 0;
+
+    border-radius:20px;
+
+    text-align:left;
+
+}
+
+
+
+.message-card h3{
+
+    color:#d63384;
+
+}
+
+
+
+textarea{
+
+    min-height:120px;
+
+    resize:none;
+
+}
+
+
+
+#chatMessages{
+
+    background:#fff7fb;
+
+    padding:10px;
+
+    border-radius:20px;
+
+    max-height:450px;
+
+    overflow-y:auto;
+
+}
+
+
+
+small{
+
+    color:#999;
+
+}
