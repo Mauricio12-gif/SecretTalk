@@ -100,16 +100,18 @@ window.sendMessage = async function(){
 
             collection(db,"messages"),
 
-            {
+       {
 text: message,
 
 receiver: receiver,
 
 anonymousId: anonymousId,
 
+conversationId: conversationId,
+
 time: serverTimestamp()
 
-            }
+       }
 
         );
 
