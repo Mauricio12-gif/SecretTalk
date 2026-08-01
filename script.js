@@ -1,150 +1,163 @@
 import { db } from "./firebase.js";
-const params = new URLSearchParams(window.location.search);
-
-const receiver = params.get("user");
-
-
-if(receiver){
-
-    document.getElementById("receiverName").innerHTML =
-    "Send " + receiver + " an anonymous message";
-
-}
-
 
 import {
-
-collection,
-
-addDoc,
-
-serverTimestamp
-
+    collection,
+    addDoc,
+    serverTimestamp
 } from 
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 
 
+// GET RECEIVER FROM LINK
+
+const params = new URLSearchParams(window.location.search);
+
+const receiver = params.get("user") || "Mauricio";
+
+
+
+const receiverName = document.getElementById("receiverName");
+
+
+if(receiverName){
+
+    receiverName.innerHTML =
+    "Send " + receiver + " an anonymous message";
+
+}
+
+
+
+
+// SEND MESSAGE
+
 window.sendMessage = async function(){
 
 
-const messageBox = document.getElementById("message");
+    const messageBox = document.getElementById("message");
 
-const status = document.getElementById("status");
-
-
-const message = messageBox.value.trim();
-  
+    const status = document.getElementById("status");
 
 
-
-if(message === ""){
-
-
-alert("Write a message first");
-
-return;
-
-
-}
+    const message = messageBox.value.trim();
 
 
 
-try{
+    if(message === ""){
 
+        alert("Write a message first");
 
-await addDoc(
+        return;
 
-collection(db,"messages"),
-
-{
-    text: message,
-
-    receiver: receiver,
-
-    time: serverTimestamp()
-}
-
-);
+    }
 
 
 
-status.innerHTML = 
-"Message sent ❤️";
+    try{
 
 
-messageBox.value = "";
+        await addDoc(
+
+            collection(db,"messages"),
+
+            {
+
+                text: message,
+
+                receiver: receiver,
+
+                time: serverTimestamp()
+
+            }
+
+        );
 
 
-}
+
+        status.innerHTML =
+        "Message sent ❤️";
 
 
-catch(error){
+        messageBox.value = "";
 
 
-console.log(error);
+        console.log("Message saved");
 
 
-status.innerHTML =
-"Failed to send ❌";
+    }
 
 
-}
+    catch(error){
 
+
+        console.log(error);
+
+
+        status.innerHTML =
+        "Failed to send ❌";
+
+
+    }
 
 
 };
+
+
+
+
+
 // CREATE SECRET TALK LINK
 
 window.createLink = function(){
 
 
-const username = document
-.getElementById("username")
-.value
-.trim();
+    const username = document
+    .getElementById("username")
+    .value
+    .trim();
 
 
 
-const result = document
-.getElementById("result");
+    const result = document
+    .getElementById("result");
 
 
 
-if(username === ""){
+    if(username === ""){
 
 
-result.innerHTML =
-"Enter a username first";
-
-return;
-
-}
+        result.innerHTML =
+        "Enter a username first";
 
 
+        return;
 
-const link =
-
-window.location.origin +
-
-"/SecretTalk/?user=" +
-
-encodeURIComponent(username);
+    }
 
 
 
-result.innerHTML = `
+    const link =
 
-Your SecretTalk link:
+    window.location.origin +
 
-<br><br>
+    "/SecretTalk/?user=" +
 
-<a href="${link}">
-${link}
-</a>
+    encodeURIComponent(username);
 
-`;
 
+
+    result.innerHTML = `
+
+    Your SecretTalk link:
+
+    <br><br>
+
+    <a href="${link}">
+    ${link}
+    </a>
+
+    `;
 
 
 };
