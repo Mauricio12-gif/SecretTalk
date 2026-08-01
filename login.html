@@ -8,45 +8,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
 
 </head>
+
 
 <body>
 
 <div class="container">
 
+
 <h1>💬 SecretTalk Login</h1>
 
-<input
-id="email"
-type="email"
-placeholder="Email">
 
-<br><br>
+<input
+id="username"
+placeholder="Username">
+
 
 <input
 id="password"
 type="password"
 placeholder="Password">
 
-<br><br>
 
-<button id="loginButton">
+<button onclick="login()">
 Login
 </button>
 
+
 <p id="status"></p>
 
-<br>
-
-<a href="signup.html">
-Create Account
-</a>
 
 </div>
 
+
 <script type="module" src="login.js"></script>
+
 
 </body>
 
