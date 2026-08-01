@@ -32,6 +32,7 @@ return;
 
 
 console.log("Logged in UID:", user.uid);
+  alert(JSON.stringify(userData));
 
 
 
