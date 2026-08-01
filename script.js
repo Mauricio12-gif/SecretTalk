@@ -226,7 +226,9 @@ window.location.href =
 
 + "&user="
 
-+ encodeURIComponent(receiver);
++ encodeURIComponent(receiver)
+
++ "&mode=anonymous";
 
 };
 if ("serviceWorker" in navigator) {
