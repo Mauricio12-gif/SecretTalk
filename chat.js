@@ -76,22 +76,39 @@ snapshot.forEach((doc)=>{
 const data = doc.data();
 
 
+const mine = data.sender === senderName;
+
+
+
 chatBox.innerHTML += `
 
 <div style="
-background:#ffeef5;
-padding:10px;
+text-align:${mine ? "right" : "left"};
 margin:10px;
-border-radius:15px;
 ">
+
+
+<div style="
+background:${mine ? "#d1ffd6" : "#ffeef5"};
+padding:12px;
+border-radius:15px;
+display:inline-block;
+">
+
 
 ${data.text}
 
+
 <br>
+
 
 <small>
 ${data.sender}
 </small>
+
+
+</div>
+
 
 </div>
 
