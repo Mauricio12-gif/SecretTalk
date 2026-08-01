@@ -1,18 +1,18 @@
 import { auth, db } from "./firebase.js";
 
 import {
-    onAuthStateChanged
+onAuthStateChanged
 } from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
 
 
 import {
-    doc,
-    getDoc,
-    collection,
-    query,
-    where,
-    onSnapshot
+doc,
+getDoc,
+collection,
+query,
+where,
+onSnapshot
 } from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
@@ -23,21 +23,41 @@ onAuthStateChanged(auth, async (user)=>{
 
 if(!user){
 
-    window.location.href = "signup.html";
+window.location.href = "login.html";
 
-    return;
+return;
+
+}
+
+
+console.log("Logged in:", user.uid);
+
+
+
+try{
+
+
+const userDoc = await getDoc(
+doc(db,"users",user.uid)
+);
+
+
+
+if(!userDoc.exists()){
+
+document.getElementById("messages").innerHTML =
+"User profile not found";
+
+return;
 
 }
 
 
 
-const userDoc = await getDoc(
-    doc(db,"users",user.uid)
-);
-
-
-
 const userData = userDoc.data();
+
+
+console.log("User data:", userData);
 
 
 
@@ -51,11 +71,8 @@ document.getElementById("welcome").innerHTML =
 
 
 const link =
-
 window.location.origin +
-
 "/SecretTalk/?user=" +
-
 encodeURIComponent(username);
 
 
@@ -114,20 +131,28 @@ border-radius:15px;
 
 <p>${data.text}</p>
 
-<small>
-Anonymous
-</small>
+<small>Anonymous</small>
 
 </div>
 
 `;
 
-
-
 });
 
 
 });
+
+
+}
+
+catch(error){
+
+console.log(error);
+
+document.getElementById("messages").innerHTML =
+"Error: " + error.message;
+
+}
 
 
 });
