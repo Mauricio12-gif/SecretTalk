@@ -30,8 +30,8 @@ return;
 }
 
 
-document.getElementById("welcome").innerHTML =
-"Logged in UID: " + user.uid;
+
+console.log("Logged in UID:", user.uid);
 
 
 
@@ -58,11 +58,27 @@ return;
 const userData = userDoc.data();
 
 
-console.log("User data:", userData);
+
+console.log("User data received:", userData);
 
 
 
-const username = userData.username;
+const username = userData.username?.trim();
+
+
+
+console.log("Username:", username);
+
+
+
+if(!username){
+
+document.getElementById("messages").innerHTML =
+"Username missing in profile";
+
+return;
+
+}
 
 
 
@@ -132,11 +148,15 @@ border-radius:15px;
 
 <p>${data.text}</p>
 
-<small>Anonymous</small>
+<small>
+Anonymous
+</small>
 
 </div>
 
 `;
+
+
 
 });
 
@@ -146,12 +166,16 @@ border-radius:15px;
 
 }
 
+
 catch(error){
 
-console.log(error);
+
+console.log("ERROR:", error);
+
 
 document.getElementById("messages").innerHTML =
 "Error: " + error.message;
+
 
 }
 
