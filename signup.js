@@ -14,7 +14,7 @@ import {
 
 
 
-window.signup = async function(){
+async function signup(){
 
 
 const username = document
@@ -111,3 +111,6 @@ error.message;
 
 
 };
+document
+.getElementById("signupButton")
+.addEventListener("click", signup);
