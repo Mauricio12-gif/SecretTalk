@@ -183,8 +183,22 @@ document.getElementById("messages").innerHTML =
 
 
 });
-window.logout = function(){
+window.logout = async function(){
 
-alert("Logout works");
+try{
+
+await signOut(auth);
+
+window.location.href = "home.html";
+
+}
+
+catch(error){
+
+console.log(error);
+
+alert("Logout failed");
+
+}
 
 };
