@@ -120,18 +120,17 @@ await addDoc(
 collection(db,"messages"),
 
 {
-
 text: reply,
 
-receiver: receiver,
+sender: receiver,
 
-anonymousId: "Mauricio",
+receiver: anonymousId,
 
 conversationId: conversationId,
 
 time: serverTimestamp()
 
-}
+  }
 
 );
 
