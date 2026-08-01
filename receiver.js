@@ -148,11 +148,27 @@ margin:10px;
 border-radius:15px;
 ">
 
-<p>${data.text}</p>
+
+<p>
+${data.text}
+</p>
+
 
 <small>
-Anonymous
+${data.anonymousId || "Anonymous"}
 </small>
+
+
+<br><br>
+
+
+<button onclick="openChat(
+'${data.conversationId}',
+'${data.anonymousId}'
+)">
+Open Chat
+</button>
+
 
 </div>
 
