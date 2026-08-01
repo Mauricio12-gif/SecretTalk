@@ -129,7 +129,7 @@ messagesDiv.innerHTML =
 return;
 
 }
-
+  const chats = {};
 
 
 snapshot.forEach((doc)=>{
@@ -137,6 +137,39 @@ snapshot.forEach((doc)=>{
 
 const data = doc.data();
 
+
+const id = data.anonymousId;
+
+
+if(!chats[id]){
+
+chats[id] = {
+
+anonymousId: id,
+
+conversationId: data.conversationId,
+
+lastMessage: data.text
+
+};
+
+}
+else{
+
+chats[id].lastMessage = data.text;
+
+}
+
+
+});
+
+
+
+messagesDiv.innerHTML = "";
+
+
+
+Object.values(chats).forEach((chat)=>{
 
 
 messagesDiv.innerHTML += `
@@ -149,22 +182,19 @@ border-radius:15px;
 ">
 
 
+<h3>
+${chat.anonymousId}
+</h3>
+
+
 <p>
-${data.text}
+${chat.lastMessage}
 </p>
 
 
-<small>
-${data.anonymousId || "Anonymous"}
-</small>
-
-
-<br><br>
-
-
 <button onclick="openChat(
-'${data.conversationId}',
-'${data.anonymousId}'
+'${chat.conversationId}',
+'${chat.anonymousId}'
 )">
 Open Chat
 </button>
@@ -172,8 +202,8 @@ Open Chat
 
 </div>
 
-`;
 
+`;
 
 
 });
