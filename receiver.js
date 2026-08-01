@@ -32,7 +32,6 @@ return;
 
 
 console.log("Logged in UID:", user.uid);
-  alert(JSON.stringify(userData));
 
 
 
@@ -57,6 +56,7 @@ return;
 
 
 const userData = userDoc.data();
+  alert(JSON.stringify(userData));
 
 
 
