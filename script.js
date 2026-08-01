@@ -1,11 +1,15 @@
 import { db } from "./firebase.js";
 const params = new URLSearchParams(window.location.search);
 
-const receiver = params.get("user") || "Mauricio";
+const receiver = params.get("user");
 
 
-document.getElementById("receiverName").innerHTML =
-"Sending message to: " + receiver;
+if(receiver){
+
+    document.getElementById("receiverName").innerHTML =
+    "Send " + receiver + " an anonymous message";
+
+}
 
 
 import {
