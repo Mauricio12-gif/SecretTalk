@@ -1,40 +1,43 @@
 import { db } from "./firebase.js";
 
 import {
-
 collection,
-
-onSnapshot,
-
-query,
-
-orderBy,
-
-where
-
-} from
+onSnapshot
+} from 
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
-
 
 
 const messagesDiv = document.getElementById("messages");
 
 
-
-const params = new URLSearchParams(window.location.search);
-
-const username = params.get("user") || "Mauricio";
+onSnapshot(collection(db,"messages"),(snapshot)=>{
 
 
+messagesDiv.innerHTML = "";
 
-const messagesQuery = query(
 
-collection(db,"messages"),
+snapshot.forEach((doc)=>{
 
-where("receiver","==",username),
 
-orderBy("time","desc")
+const data = doc.data();
 
+
+messagesDiv.innerHTML += `
+
+<div>
+
+<p>${data.text}</p>
+
+<small>${data.receiver || "No receiver"}</small>
+
+</div>
+
+`;
+
+});
+
+
+});
 );
 
 
