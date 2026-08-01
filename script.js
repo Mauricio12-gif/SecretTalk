@@ -83,12 +83,13 @@ window.sendMessage = async function(){
             collection(db,"messages"),
 
             {
+text: message,
 
-                text: message,
+receiver: receiver,
 
-                receiver: receiver,
+anonymousId: anonymousId,
 
-                time: serverTimestamp()
+time: serverTimestamp()
 
             }
 
