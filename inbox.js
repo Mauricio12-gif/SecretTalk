@@ -1,43 +1,40 @@
 import { db } from "./firebase.js";
 
 import {
+
 collection,
-onSnapshot
-} from 
+
+onSnapshot,
+
+query,
+
+orderBy,
+
+where
+
+} from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
 
 
 const messagesDiv = document.getElementById("messages");
 
 
-onSnapshot(collection(db,"messages"),(snapshot)=>{
+
+const params = new URLSearchParams(window.location.search);
+
+const username = params.get("user") || "Mauricio";
 
 
-messagesDiv.innerHTML = "";
 
+const messagesQuery = query(
 
-snapshot.forEach((doc)=>{
+collection(db,"messages"),
 
+where("receiver","==",username),
 
-const data = doc.data();
+orderBy("time","desc")
 
-
-messagesDiv.innerHTML += `
-
-<div>
-
-<p>${data.text}</p>
-
-<small>${data.receiver || "No receiver"}</small>
-
-</div>
-
-`;
-
-});
-
-
-});
 );
 
 
@@ -56,48 +53,6 @@ if(snapshot.empty){
 messagesDiv.innerHTML +=
 
 "<p>No messages yet</p>";
-
-return;
-
-}
-
-
-
-snapshot.forEach((doc)=>{
-
-
-const data = doc.data();
-
-
-
-messagesDiv.innerHTML += `
-
-<div style="
-background:#ffeef5;
-padding:15px;
-margin:10px;
-border-radius:15px;
-">
-
-<p>${data.text}</p>
-
-<small>Anonymous</small>
-
-</div>
-
-`;
-
-
-
-});
-
-
-});
-
-if(snapshot.empty){
-
-messagesDiv.innerHTML = 
-"No messages yet";
 
 return;
 
