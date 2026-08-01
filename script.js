@@ -120,10 +120,17 @@ time: serverTimestamp()
 
 
         status.innerHTML =
-        "Message sent ❤️";
+
+"Message sent ❤️ <br><br>" +
+
+`
+<button onclick="continueChat()">
+Continue chatting
+</button>
+`;
 
 
-        messageBox.value = "";
+messageBox.value = "";
 
 
         console.log("Message saved");
