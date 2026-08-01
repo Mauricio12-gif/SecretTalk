@@ -1,11 +1,9 @@
 import { db } from "./firebase.js";
 
-
 import {
 collection,
 query,
 where,
-orderBy,
 onSnapshot,
 addDoc,
 serverTimestamp
@@ -14,19 +12,21 @@ from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 
-
-// GET CHAT DETAILS FROM LINK
+// GET DATA FROM URL
 
 const params = new URLSearchParams(window.location.search);
 
-
 const conversationId = params.get("conversation");
-
 const anonymousId = params.get("anonymous");
-
-const receiver = params.get("user");
-
+const username = params.get("user");
 const mode = params.get("mode");
+
+
+
+console.log("Conversation:", conversationId);
+console.log("Anonymous:", anonymousId);
+console.log("User:", username);
+console.log("Mode:", mode);
 
 
 
@@ -35,24 +35,18 @@ let receiverName;
 
 
 
-// DECIDE WHO IS CHATTING
-
 if(mode === "anonymous"){
 
 senderName = anonymousId;
-
-receiverName = receiver;
+receiverName = username;
 
 }
 else{
 
-senderName = receiver;
-
+senderName = username;
 receiverName = anonymousId;
 
 }
-
-
 
 
 
@@ -61,17 +55,13 @@ document.getElementById("chatTitle").innerHTML =
 
 
 
-
-
-// LOAD CHAT MESSAGES
+// LOAD MESSAGES
 
 const messagesQuery = query(
 
 collection(db,"messages"),
 
-where("conversationId","==",conversationId),
-
-orderBy("time","asc")
+where("conversationId","==",conversationId)
 
 );
 
@@ -88,11 +78,47 @@ chatBox.innerHTML = "";
 
 
 
+if(snapshot.empty){
+
+chatBox.innerHTML =
+"No messages yet";
+
+return;
+
+}
+
+
+
+let messages = [];
+
+
+
 snapshot.forEach((doc)=>{
 
+messages.push(doc.data());
 
-const data = doc.data();
+});
 
+
+
+// SORT BY TIME
+
+messages.sort((a,b)=>{
+
+if(!a.time || !b.time){
+
+return 0;
+
+}
+
+return a.time.seconds - b.time.seconds;
+
+});
+
+
+
+
+messages.forEach((data)=>{
 
 
 const mine =
@@ -104,28 +130,25 @@ chatBox.innerHTML += `
 
 <div style="
 display:flex;
-justify-content:${mine ? "flex-end" : "flex-start"};
+justify-content:${mine ? "flex-end":"flex-start"};
 margin:10px;
 ">
 
 
 <div style="
-background:${mine ? "#d1ffd6" : "#ffeef5"};
+background:${mine ? "#d1ffd6":"#ffeef5"};
 padding:12px;
 border-radius:15px;
 max-width:70%;
 ">
 
-
-<p style="margin:0;">
+<p>
 ${data.text}
 </p>
-
 
 <small>
 ${data.sender}
 </small>
-
 
 </div>
 
@@ -139,15 +162,12 @@ ${data.sender}
 });
 
 
-
 });
 
 
 
 
-
-
-// SEND REPLY
+// SEND MESSAGE
 
 window.sendReply = async function(){
 
@@ -156,12 +176,12 @@ const replyBox =
 document.getElementById("reply");
 
 
-const reply =
+const message =
 replyBox.value.trim();
 
 
 
-if(reply===""){
+if(message===""){
 
 return;
 
@@ -175,19 +195,17 @@ collection(db,"messages"),
 
 {
 
-text: reply,
+text:message,
 
+sender:senderName,
 
-sender: senderName,
+receiver:receiverName,
 
+conversationId:conversationId,
 
-receiver: receiverName,
+time:serverTimestamp(),
 
-
-conversationId: conversationId,
-
-
-time: serverTimestamp()
+anonymousId: anonymousId
 
 }
 
@@ -195,8 +213,6 @@ time: serverTimestamp()
 
 
 
-replyBox.value = "";
-
-
+replyBox.value="";
 
 };
