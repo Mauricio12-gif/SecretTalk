@@ -57,7 +57,6 @@ return;
 
 
 const userData = userDoc.data();
-  alert(JSON.stringify(userData));
 
 
 
@@ -90,8 +89,11 @@ document.getElementById("welcome").innerHTML =
 
 
 const link =
+
 window.location.origin +
+
 "/SecretTalk/?user=" +
+
 encodeURIComponent(username);
 
 
@@ -129,7 +131,13 @@ messagesDiv.innerHTML =
 return;
 
 }
-  const chats = {};
+
+
+
+// GROUP MESSAGES BY ANONYMOUS USER
+
+const chats = {};
+
 
 
 snapshot.forEach((doc)=>{
@@ -141,22 +149,45 @@ const data = doc.data();
 const id = data.anonymousId;
 
 
+
+if(!id){
+
+return;
+
+}
+
+
+
 if(!chats[id]){
+
 
 chats[id] = {
 
+
 anonymousId: id,
+
 
 conversationId: data.conversationId,
 
-lastMessage: data.text
+
+lastMessage: data.text,
+
+
+time: data.time
+
 
 };
+
 
 }
 else{
 
+
 chats[id].lastMessage = data.text;
+
+
+chats[id].conversationId = data.conversationId;
+
 
 }
 
@@ -165,8 +196,9 @@ chats[id].lastMessage = data.text;
 
 
 
-messagesDiv.innerHTML = "";
 
+
+// DISPLAY CHAT FOLDERS
 
 
 Object.values(chats).forEach((chat)=>{
@@ -202,8 +234,8 @@ Open Chat
 
 </div>
 
-
 `;
+
 
 
 });
@@ -222,6 +254,7 @@ console.log("ERROR:", error);
 
 
 document.getElementById("messages").innerHTML =
+
 "Error: " + error.message;
 
 
@@ -229,26 +262,58 @@ document.getElementById("messages").innerHTML =
 
 
 });
+
+
+
+
+// LOGOUT
+
 window.logout = async function(){
+
 
 try{
 
+
 await signOut(auth);
+
 
 window.location.href = "home.html";
 
+
 }
+
 
 catch(error){
 
+
 console.log(error);
+
 
 alert("Logout failed");
 
+
 }
 
+
 };
+
+
+
+
+
+// OPEN CHAT AS ACCOUNT OWNER
+
 window.openChat = function(conversationId, anonymousId){
+
+
+
+const username =
+
+document.getElementById("welcome")
+.innerText
+.replace("Welcome ","")
+.replace(" 👋","");
+
 
 
 window.location.href =
@@ -263,9 +328,9 @@ window.location.href =
 
 + "&user="
 
-+ encodeURIComponent(
-document.getElementById("welcome").innerText.replace("Welcome ","").replace(" 👋","")
-);
++ encodeURIComponent(username)
+
++ "&mode=owner";
 
 
 };
