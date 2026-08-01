@@ -30,7 +30,8 @@ return;
 }
 
 
-console.log("Logged in:", user.uid);
+document.getElementById("welcome").innerHTML =
+"Logged in UID: " + user.uid;
 
 
 
