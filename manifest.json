@@ -2,7 +2,7 @@
   "name": "SecretTalk",
   "short_name": "SecretTalk",
   "description": "Send and receive anonymous messages",
-  "start_url": "/SecretTalk/",
+  "start_url": "/SecretTalk/home.html"
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff4f81",
