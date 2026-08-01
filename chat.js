@@ -137,7 +137,7 @@ collection(db,"messages"),
 {
 text: reply,
 
-sender: receiver,
+sender: senderName,
 
 receiver: anonymousId,
 
