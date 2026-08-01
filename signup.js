@@ -1,116 +1,74 @@
-import { auth, db } from "./firebase.js";
-alert("Signup JS loaded");
+import { db } from "./firebase.js";
 
 import {
-    createUserWithEmailAndPassword
-} from 
-"https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
-
-import {
-    doc,
-    setDoc
-} from
+collection,
+addDoc,
+serverTimestamp
+}
+from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
+alert("Signup JS loaded");
+
+window.createAccount = async function(){
+
+const username =
+document.getElementById("username").value.trim();
+
+const password =
+document.getElementById("password").value.trim();
+
+const status =
+document.getElementById("status");
 
 
-async function signup(){
+if(username === "" || password === ""){
 
+status.innerHTML =
+"Fill all fields";
 
-const username = document
-.getElementById("username")
-.value
-.trim();
-
-
-const email = document
-.getElementById("email")
-.value
-.trim();
-
-
-const password = document
-.getElementById("password")
-.value
-.trim();
-
-
-const status = document
-.getElementById("status");
-
-
-
-if(username === "" || email === "" || password === ""){
-
-    status.innerHTML =
-    "Fill all fields";
-
-    return;
+return;
 
 }
 
 
-
 try{
 
+await addDoc(
 
-const userCredential =
-await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-);
-
-
-
-const user = userCredential.user;
-
-
-
-await setDoc(
-
-doc(db,"users",user.uid),
+collection(db,"users"),
 
 {
 
 username: username,
 
-email: email,
+password: password,
 
-createdAt: new Date()
+createdAt: serverTimestamp()
 
 }
 
 );
 
-
-
 status.innerHTML =
 "Account created successfully ❤️";
 
 
+setTimeout(()=>{
 
-console.log("User created:", user.uid);
+window.location.href = "login.html";
 
-
+},1500);
 
 }
 
-
 catch(error){
 
-
 console.log(error);
-
 
 status.innerHTML =
 error.message;
 
-
 }
 
-
 };
-document
-.getElementById("signupButton")
-.addEventListener("click", signup);
