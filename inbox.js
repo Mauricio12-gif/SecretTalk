@@ -24,8 +24,6 @@ collection(db,"messages"),
 
 where("receiver","==",receiver),
 
-orderBy("time","desc")
-
 );
 
 
