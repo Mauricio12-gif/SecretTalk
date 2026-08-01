@@ -218,3 +218,24 @@ alert("Logout failed");
 }
 
 };
+window.openChat = function(conversationId, anonymousId){
+
+
+window.location.href =
+
+"chat.html?conversation="
+
++ conversationId
+
++ "&anonymous="
+
++ encodeURIComponent(anonymousId)
+
++ "&user="
+
++ encodeURIComponent(
+document.getElementById("welcome").innerText.replace("Welcome ","").replace(" 👋","")
+);
+
+
+};
