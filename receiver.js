@@ -26,10 +26,13 @@ window.location.href = "login.html";
 
 
 
+
 // SHOW WELCOME
 
 document.getElementById("welcome").innerHTML =
 "Welcome " + username + " 👋";
+
+
 
 
 
@@ -40,13 +43,83 @@ const link =
 
 window.location.origin +
 
-"/SecretTalk/?user=" +
+"/SecretTalk/send.html?user=" +
 
 encodeURIComponent(username);
 
 
 
 document.getElementById("myLink").innerHTML = link;
+
+
+
+
+
+
+// COPY LINK
+
+window.copyLink = function(){
+
+
+const link =
+document.getElementById("myLink").innerText;
+
+
+navigator.clipboard.writeText(link);
+
+
+alert("Link copied ❤️");
+
+
+};
+
+
+
+
+
+
+// SHARE LINK
+
+window.shareLink = function(){
+
+
+const link =
+document.getElementById("myLink").innerText;
+
+
+
+if(navigator.share){
+
+
+navigator.share({
+
+title:"My SecretTalk",
+
+text:"Send me an anonymous message 💬",
+
+url:link
+
+});
+
+
+}
+
+else{
+
+
+navigator.clipboard.writeText(link);
+
+
+alert("Link copied ❤️");
+
+
+}
+
+
+
+};
+
+
 
 
 
@@ -64,6 +137,8 @@ where("receiver","==",username)
 
 
 
+
+
 onSnapshot(messagesQuery,(snapshot)=>{
 
 
@@ -77,16 +152,23 @@ messagesDiv.innerHTML = "";
 
 if(snapshot.empty){
 
+
 messagesDiv.innerHTML =
 "No messages yet";
 
+
 return;
+
 
 }
 
 
 
+
+
 const chats = {};
+
+
 
 
 
@@ -112,7 +194,10 @@ anonymousId:id,
 conversationId:data.conversationId,
 
 
-lastMessage:data.text
+lastMessage:data.text,
+
+
+time:data.time
 
 
 };
@@ -127,6 +212,10 @@ chats[id].lastMessage =
 data.text;
 
 
+chats[id].time =
+data.time;
+
+
 }
 
 
@@ -136,7 +225,10 @@ data.text;
 
 
 
+
+
 Object.values(chats).forEach((chat)=>{
+
 
 
 messagesDiv.innerHTML += `
@@ -176,11 +268,16 @@ Open Chat
 `;
 
 
+
+});
+
+
+
 });
 
 
 
-});
+
 
 
 
@@ -210,6 +307,9 @@ window.location.href =
 
 
 };
+
+
+
 
 
 
