@@ -24,6 +24,21 @@ const conversationId = params.get("conversation");
 const anonymousId = params.get("anonymous");
 
 const receiver = params.get("user");
+const mode = params.get("mode");
+
+let senderName;
+
+
+if(mode === "anonymous"){
+
+senderName = anonymousId;
+
+}
+else{
+
+senderName = receiver;
+
+}
 
 
 
