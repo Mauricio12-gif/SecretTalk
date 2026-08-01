@@ -17,6 +17,24 @@ const receiver = params.get("user") || "Mauricio";
 // CREATE ANONYMOUS ID
 
 let anonymousId = localStorage.getItem("anonymousId");
+let conversationId = localStorage.getItem("conversationId");
+
+
+if(!conversationId){
+
+conversationId =
+Date.now().toString();
+
+
+localStorage.setItem(
+"conversationId",
+conversationId
+);
+
+}
+
+
+console.log("Conversation:", conversationId);
 
 
 if(!anonymousId){
