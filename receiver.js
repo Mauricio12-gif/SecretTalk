@@ -1,92 +1,40 @@
-import { auth, db } from "./firebase.js";
-
-import {
-onAuthStateChanged,
-signOut
-} from
-"https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
+import { db } from "./firebase.js";
 
 
 import {
-doc,
-getDoc,
 collection,
 query,
 where,
 onSnapshot
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 
 
-onAuthStateChanged(auth, async (user)=>{
+// GET LOGGED IN USER
 
-
-if(!user){
-
-window.location.href = "login.html";
-
-return;
-
-}
-
-
-
-console.log("Logged in UID:", user.uid);
-
-
-
-try{
-
-
-const userDoc = await getDoc(
-doc(db,"users",user.uid)
-);
-
-
-
-if(!userDoc.exists()){
-
-document.getElementById("messages").innerHTML =
-"User profile not found";
-
-return;
-
-}
-
-
-
-const userData = userDoc.data();
-
-
-
-console.log("User data received:", userData);
-
-
-
-const username = userData.username?.trim();
-
-
-
-console.log("Username:", username);
+const username = localStorage.getItem("username");
 
 
 
 if(!username){
 
-document.getElementById("messages").innerHTML =
-"Username missing in profile";
-
-return;
+window.location.href = "login.html";
 
 }
 
 
 
+// SHOW WELCOME
+
 document.getElementById("welcome").innerHTML =
 "Welcome " + username + " 👋";
 
 
+
+
+// CREATE USER LINK
 
 const link =
 
@@ -101,6 +49,10 @@ encodeURIComponent(username);
 document.getElementById("myLink").innerHTML = link;
 
 
+
+
+
+// LOAD MESSAGES
 
 const messagesQuery = query(
 
@@ -134,8 +86,6 @@ return;
 
 
 
-// GROUP MESSAGES BY ANONYMOUS USER
-
 const chats = {};
 
 
@@ -150,43 +100,31 @@ const id = data.anonymousId;
 
 
 
-if(!id){
-
-return;
-
-}
-
-
-
 if(!chats[id]){
 
 
 chats[id] = {
 
 
-anonymousId: id,
+anonymousId:id,
 
 
-conversationId: data.conversationId,
+conversationId:data.conversationId,
 
 
-lastMessage: data.text,
-
-
-time: data.time
+lastMessage:data.text
 
 
 };
 
 
 }
+
 else{
 
 
-chats[id].lastMessage = data.text;
-
-
-chats[id].conversationId = data.conversationId;
+chats[id].lastMessage =
+data.text;
 
 
 }
@@ -196,9 +134,6 @@ chats[id].conversationId = data.conversationId;
 
 
 
-
-
-// DISPLAY CHAT FOLDERS
 
 
 Object.values(chats).forEach((chat)=>{
@@ -206,59 +141,43 @@ Object.values(chats).forEach((chat)=>{
 
 messagesDiv.innerHTML += `
 
-<div style="
-background:#ffeef5;
-padding:15px;
-margin:10px;
-border-radius:15px;
-">
+
+<div class="message-card">
 
 
 <h3>
+
 ${chat.anonymousId}
+
 </h3>
 
 
 <p>
+
 ${chat.lastMessage}
+
 </p>
+
 
 
 <button onclick="openChat(
 '${chat.conversationId}',
 '${chat.anonymousId}'
 )">
+
 Open Chat
+
 </button>
 
 
 </div>
 
+
 `;
 
 
-
 });
 
-
-});
-
-
-}
-
-
-catch(error){
-
-
-console.log("ERROR:", error);
-
-
-document.getElementById("messages").innerHTML =
-
-"Error: " + error.message;
-
-
-}
 
 
 });
@@ -266,53 +185,11 @@ document.getElementById("messages").innerHTML =
 
 
 
-// LOGOUT
-
-window.logout = async function(){
 
 
-try{
-
-
-await signOut(auth);
-
-
-window.location.href = "home.html";
-
-
-}
-
-
-catch(error){
-
-
-console.log(error);
-
-
-alert("Logout failed");
-
-
-}
-
-
-};
-
-
-
-
-
-// OPEN CHAT AS ACCOUNT OWNER
+// OPEN CHAT
 
 window.openChat = function(conversationId, anonymousId){
-
-
-
-const username =
-
-document.getElementById("welcome")
-.innerText
-.replace("Welcome ","")
-.replace(" 👋","");
 
 
 
@@ -328,9 +205,26 @@ window.location.href =
 
 + "&user="
 
-+ encodeURIComponent(username)
++ encodeURIComponent(username);
 
-+ "&mode=owner";
+
+
+};
+
+
+
+
+
+// LOGOUT
+
+window.logout = function(){
+
+
+localStorage.removeItem("username");
+
+
+window.location.href =
+"home.html";
 
 
 };
