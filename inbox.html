@@ -3,7 +3,7 @@
 
 <head>
 
-<title>SecretTalk Inbox</title>
+<title>SecretTalk</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,12 +17,60 @@
 
 <div class="container">
 
-<h1>📩 SecretTalk Inbox</h1>
+
+<h1>💬 SecretTalk</h1>
 
 
-<div id="messages">
+<!-- SEND MESSAGE SECTION -->
 
-Loading messages...
+<div id="sendSection">
+
+<p id="receiverName">
+Send an anonymous message
+</p>
+
+
+<textarea 
+id="message"
+placeholder="Write your message...">
+</textarea>
+
+
+<button onclick="sendMessage()">
+Send ❤️
+</button>
+
+
+<p id="status"></p>
+
+</div>
+
+
+
+<hr>
+
+
+
+<!-- CREATE LINK SECTION -->
+
+<div id="createSection">
+
+
+<h2>Create your own SecretTalk link</h2>
+
+
+<input 
+id="username"
+placeholder="Enter your username">
+
+
+<button onclick="createLink()">
+Generate Link
+</button>
+
+
+<p id="result"></p>
+
 
 </div>
 
@@ -30,7 +78,11 @@ Loading messages...
 </div>
 
 
-<script type="module" src="inbox.js"></script>
+
+<script type="module" src="script.js"></script>
+
+
+<script src="profile.js"></script>
 
 
 </body>
