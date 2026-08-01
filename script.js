@@ -212,6 +212,23 @@ window.createLink = function(){
 
 
 };
+window.continueChat = function(){
+
+window.location.href =
+
+"chat.html?conversation="
+
++ conversationId
+
++ "&anonymous="
+
++ encodeURIComponent(anonymousId)
+
++ "&user="
+
++ encodeURIComponent(receiver);
+
+};
 if ("serviceWorker" in navigator) {
 
 navigator.serviceWorker.register("service-worker.js")
