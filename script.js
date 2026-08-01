@@ -103,6 +103,8 @@ window.sendMessage = async function(){
        {
 text: message,
 
+sender: anonymousId,
+
 receiver: receiver,
 
 anonymousId: anonymousId,
