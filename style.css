@@ -1,101 +1,89 @@
-body{
+import { db } from "./firebase.js";
 
-font-family:Arial, sans-serif;
 
-background:#ffeef5;
+import {
+collection,
+addDoc,
+serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
-display:flex;
 
-justify-content:center;
 
-align-items:center;
+window.createAccount = async function(){
 
-height:100vh;
 
-margin:0;
+const username =
+document.getElementById("username").value.trim();
+
+
+const password =
+document.getElementById("password").value.trim();
+
+
+
+const status =
+document.getElementById("status");
+
+
+
+if(username === "" || password === ""){
+
+status.innerHTML =
+"Fill all fields";
+
+return;
 
 }
 
 
-.container{
 
-background:white;
+try{
 
-width:90%;
 
-max-width:400px;
+await addDoc(
 
-padding:30px;
+collection(db,"users"),
 
-border-radius:25px;
+{
 
-text-align:center;
+username: username,
 
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
+password: password,
+
+createdAt: serverTimestamp()
+
+}
+
+);
+
+
+
+status.innerHTML =
+"Account created ❤️";
+
+
+
+setTimeout(()=>{
+
+window.location.href =
+"login.html";
+
+},1500);
+
+
+
+}
+
+catch(error){
+
+console.log(error);
+
+status.innerHTML =
+error.message;
 
 }
 
 
-h1{
-
-color:#ff4d88;
-
-}
-
-
-textarea{
-
-width:100%;
-
-height:150px;
-
-padding:15px;
-
-border-radius:20px;
-
-border:1px solid #ddd;
-
-font-size:16px;
-
-box-sizing:border-box;
-
-resize:none;
-
-}
-
-
-button{
-
-margin-top:20px;
-
-padding:15px 30px;
-
-border:none;
-
-border-radius:30px;
-
-background:#ff4d88;
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-}
-
-
-button:hover{
-
-background:#e91e63;
-
-}
-
-
-#status{
-
-margin-top:20px;
-
-color:#ff4d88;
-
-}
+};
