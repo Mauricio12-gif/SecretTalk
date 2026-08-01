@@ -75,7 +75,7 @@ ${data.text}
 <br>
 
 <small>
-${data.anonymousId || "Mauricio"}
+${data.sender}
 </small>
 
 </div>
