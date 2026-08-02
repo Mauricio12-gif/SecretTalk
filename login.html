@@ -14,15 +14,30 @@
 
 <body>
 
+
 <div class="container">
 
 
-<h1>💬 SecretTalk Login</h1>
+<h1>💬 Welcome Back</h1>
+
+
+<p>
+Login to access your SecretTalk inbox and conversations.
+</p>
+
+
+
+<div class="heart">
+💜
+</div>
+
+
 
 
 <input
 id="username"
 placeholder="Username">
+
 
 
 <input
@@ -31,18 +46,62 @@ type="password"
 placeholder="Password">
 
 
+
 <button onclick="login()">
+
 Login
+
 </button>
+
 
 
 <p id="status"></p>
 
 
+
+
+<div class="divider"></div>
+
+
+
+<p>
+Don't have a SecretTalk account?
+</p>
+
+
+
+<button onclick="goSignup()">
+
+Create Account
+
+</button>
+
+
+
 </div>
 
 
+
+
+
+
 <script type="module" src="login.js"></script>
+
+
+
+<script>
+
+
+function goSignup(){
+
+window.location.href="signup.html";
+
+}
+
+
+</script>
+
+
 
 
 </body>
