@@ -87,33 +87,24 @@ const link =
 document.getElementById("myLink").innerText;
 
 
-
-if(navigator.share){
-
-
-navigator.share({
-
-title:"My SecretTalk",
-
-text:"Send me an anonymous message 💬",
-
-url:link
-
-});
+const message =
+"Send me an anonymous message on SecretTalk 💌\n\n"
++ link;
 
 
-}
 
-else{
+const whatsappURL =
 
+"https://wa.me/?text="
 
-navigator.clipboard.writeText(link);
-
-
-alert("Link copied ❤️");
++ encodeURIComponent(message);
 
 
-}
+
+window.open(
+whatsappURL,
+"_blank"
+);
 
 
 
