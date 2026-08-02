@@ -8,7 +8,6 @@ serverTimestamp
 from
 "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
-alert("Signup JS loaded");
 
 window.createAccount = async function(){
 
