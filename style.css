@@ -1,6 +1,11 @@
+/* =========================
+   SecretTalk Romantic Theme
+   ========================= */
+
+
 *{
     box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
+    font-family:"Segoe UI", Arial, sans-serif;
 }
 
 
@@ -13,7 +18,7 @@ body{
     background:linear-gradient(
         135deg,
         #ffe6f2,
-        #f7d8ff
+        #f3ddff
     );
 
     display:flex;
@@ -22,25 +27,30 @@ body{
 
     align-items:center;
 
-    color:#4a214f;
+    padding:20px;
+
+    color:#4b214d;
 
 }
 
 
 
+/* Main app cards */
+
 .container{
 
-    width:90%;
+    width:100%;
 
-    max-width:420px;
+    max-width:430px;
 
     background:white;
 
-    padding:30px;
+    padding:30px 25px;
 
-    border-radius:25px;
+    border-radius:30px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    box-shadow:
+    0 15px 40px rgba(155,77,202,0.18);
 
     text-align:center;
 
@@ -48,14 +58,17 @@ body{
 
 
 
+/* Headings */
+
 h1{
 
     color:#d63384;
 
+    font-size:32px;
+
     margin-bottom:10px;
 
 }
-
 
 
 h2{
@@ -65,33 +78,53 @@ h2{
 }
 
 
+h3{
 
-p{
+    color:#9b4dca;
 
-    color:#666;
+}
 
-    line-height:1.5;
+
+h4{
+
+    color:#d63384;
 
 }
 
 
 
+p{
+
+    color:#666;
+
+    line-height:1.6;
+
+}
+
+
+
+/* Inputs */
+
 input,
 textarea{
 
+
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
     margin:10px 0;
 
-    border-radius:15px;
+    border-radius:18px;
 
-    border:1px solid #f3b6d2;
+    border:1px solid #f1bfd8;
+
+    background:#fff8fc;
+
+    font-size:16px;
 
     outline:none;
 
-    font-size:16px;
 
 }
 
@@ -102,33 +135,49 @@ textarea:focus{
 
     border-color:#d63384;
 
+    box-shadow:
+    0 0 8px rgba(214,51,132,0.2);
+
 }
 
 
 
+
+/* Buttons */
+
 button{
+
 
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
     margin:8px 0;
 
     border:none;
 
-    border-radius:20px;
+    border-radius:25px;
 
-    background:linear-gradient(
-        135deg,
-        #d63384,
-        #9b4dca
+
+    background:
+    linear-gradient(
+    135deg,
+    #d63384,
+    #9b4dca
     );
+
 
     color:white;
 
     font-size:16px;
 
+    font-weight:600;
+
     cursor:pointer;
+
+
+    transition:0.3s;
+
 
 }
 
@@ -136,128 +185,30 @@ button{
 
 button:hover{
 
+    transform:translateY(-2px);
+
     opacity:0.9;
 
 }
 
 
 
-.link-box{
-
-    background:#fff0f7;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    margin:20px 0;
-
-}
-
-
-
-#myLink{
-
-    word-break:break-word;
-
-    background:white;
-
-    padding:12px;
-
-    border-radius:12px;
-
-    color:#9b4dca;
-
-}
-
-
-
-.message-card{
-
-    background:#fff0f7;
-
-    padding:18px;
-
-    margin:15px 0;
-
-    border-radius:20px;
-
-    text-align:left;
-
-}
-
-
-
-.message-card h3{
-
-    color:#d63384;
-
-}
-
-
-
-textarea{
-
-    min-height:120px;
-
-    resize:none;
-
-}
-
-
-
-#chatMessages{
-
-    background:#fff7fb;
-
-    padding:10px;
-
-    border-radius:20px;
-
-    max-height:450px;
-
-    overflow-y:auto;
-
-}
-
-
-
-small{
-
-    color:#999;
-
-}
-.home-card h3{
-
-color:#9b4dca;
-
-}
-
+/* Heart animation */
 
 .heart{
 
-font-size:45px;
+    font-size:45px;
 
-margin:20px;
+    margin:15px;
 
-animation:pulse 2s infinite;
-
-}
-
-
-.divider{
-
-height:1px;
-
-background:#f3d0e3;
-
-margin:25px 0;
+    animation:pulse 2s infinite;
 
 }
 
 
 
 @keyframes pulse{
+
 
 0%{
 
@@ -278,5 +229,203 @@ transform:scale(1.15);
 transform:scale(1);
 
 }
+
+
+}
+
+
+
+/* Divider */
+
+.divider{
+
+    height:1px;
+
+    background:#f4d4e5;
+
+    margin:25px 0;
+
+}
+
+
+
+
+/* Link section */
+
+.link-box{
+
+
+    background:#fff0f7;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    margin:20px 0;
+
+
+}
+
+
+
+#myLink{
+
+
+    background:white;
+
+    padding:12px;
+
+    border-radius:15px;
+
+    word-break:break-word;
+
+    color:#9b4dca;
+
+    font-size:14px;
+
+
+}
+
+
+
+/* Inbox messages */
+
+.message-card{
+
+
+    background:#fff0f7;
+
+    padding:18px;
+
+    margin:15px 0;
+
+    border-radius:25px;
+
+    text-align:left;
+
+    box-shadow:
+    0 5px 15px rgba(214,51,132,0.08);
+
+
+}
+
+
+
+.message-card h3{
+
+
+    margin:0;
+
+    color:#d63384;
+
+
+}
+
+
+
+.message-card p{
+
+
+    background:white;
+
+    padding:10px;
+
+    border-radius:15px;
+
+}
+
+
+
+
+/* Chat page */
+
+
+#chatMessages{
+
+
+    background:#fff7fb;
+
+    border-radius:25px;
+
+    padding:15px;
+
+    height:450px;
+
+    overflow-y:auto;
+
+
+}
+
+
+
+.chat-bubble{
+
+
+    padding:12px 15px;
+
+    border-radius:20px;
+
+    max-width:80%;
+
+    margin:10px;
+
+
+}
+
+
+
+.my-message{
+
+
+    background:#d1ffd6;
+
+    margin-left:auto;
+
+    text-align:right;
+
+
+}
+
+
+
+.other-message{
+
+
+    background:#ffeef5;
+
+    margin-right:auto;
+
+
+}
+
+
+
+
+small{
+
+    color:#999;
+
+}
+
+
+
+/* Mobile adjustment */
+
+@media(max-width:480px){
+
+
+.container{
+
+    padding:25px 18px;
+
+}
+
+
+h1{
+
+    font-size:28px;
+
+}
+
 
 }
