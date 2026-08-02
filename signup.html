@@ -3,7 +3,7 @@
 
 <head>
 
-<title>Create Account</title>
+<title>Create Account - SecretTalk</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,34 +14,94 @@
 
 <body>
 
+
 <div class="container">
+
 
 <h1>💬 Create Account</h1>
 
 
+<p>
+Create your SecretTalk identity and start receiving anonymous messages.
+</p>
+
+
+
+<div class="heart">
+❤️
+</div>
+
+
+
+
 <input 
 id="username"
-placeholder="Username">
+placeholder="Choose a username">
+
 
 
 <input 
 id="password"
 type="password"
-placeholder="Password">
+placeholder="Create password">
+
 
 
 <button onclick="createAccount()">
+
 Create Account
+
 </button>
+
 
 
 <p id="status"></p>
 
 
+
+
+<div class="divider"></div>
+
+
+
+<p>
+Already have a SecretTalk account?
+</p>
+
+
+
+<button onclick="goLogin()">
+
+Login
+
+</button>
+
+
+
 </div>
 
 
+
+
+
+
 <script type="module" src="signup.js"></script>
+
+
+
+<script>
+
+
+function goLogin(){
+
+window.location.href="login.html";
+
+}
+
+
+</script>
+
+
 
 
 </body>
