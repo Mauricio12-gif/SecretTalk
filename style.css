@@ -429,3 +429,58 @@ h1{
 
 
 }
+.chat-container{
+
+    max-width:500px;
+
+}
+
+
+
+#chatMessages{
+
+    height:450px;
+
+    overflow-y:auto;
+
+    padding:15px;
+
+    background:#fff7fb;
+
+    border-radius:25px;
+
+    margin:20px 0;
+
+}
+
+
+
+#chatMessages p{
+
+    margin:0;
+
+}
+
+
+
+#chatMessages small{
+
+    font-size:11px;
+
+}
+
+
+
+textarea{
+
+    height:100px;
+
+}
+
+
+
+.chat-container button{
+
+    margin-top:10px;
+
+}
