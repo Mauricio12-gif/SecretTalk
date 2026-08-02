@@ -1,5 +1,4 @@
 import { db } from "./firebase.js";
-alert("login.js loaded");
 
 
 import {
