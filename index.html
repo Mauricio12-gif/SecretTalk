@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
+
+<link rel="manifest" href="manifest.json">
 
 </head>
 
@@ -22,65 +23,121 @@
 <h1>💬 SecretTalk</h1>
 
 
-<!-- SEND MESSAGE -->
+<p>
+Send anonymous messages and share your thoughts freely.
+</p>
+
+
+
+<div class="heart">
+❤️
+</div>
+
+
+
 
 <div id="sendSection">
 
+
 <h3 id="receiverName">
+
 Send an anonymous message
+
 </h3>
 
 
-<textarea 
+
+<textarea
 id="message"
 placeholder="Write your message...">
 </textarea>
 
 
+
+
 <button onclick="sendMessage()">
+
 Send ❤️
+
 </button>
+
 
 
 <p id="status"></p>
 
+
+
 </div>
 
 
 
-<hr>
+
+
+<div class="divider"></div>
 
 
 
-<!-- CREATE LINK -->
 
-<div id="createSection">
+<p>
 
+Want your own SecretTalk link?
 
-<h2>Create your own SecretTalk link</h2>
-
-
-<input 
-id="username"
-placeholder="Enter your username">
+</p>
 
 
-<button onclick="createLink()">
-Generate Link
+
+
+<button onclick="goSignup()">
+
+Create Account
+
 </button>
 
 
-<p id="result"></p>
+
+<button onclick="goLogin()">
+
+Login
+
+</button>
+
+
 
 
 </div>
 
 
-</div>
+
 
 
 
 <script type="module" src="script.js"></script>
+
+
+
+
+<script>
+
+
+function goSignup(){
+
+window.location.href="signup.html";
+
+}
+
+
+
+function goLogin(){
+
+window.location.href="login.html";
+
+}
+
+
+
+</script>
+
+
 
 
 </body>
