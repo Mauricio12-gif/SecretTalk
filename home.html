@@ -17,47 +17,70 @@
 <body>
 
 
-<div class="container">
+<div class="container home-card">
 
 
 <h1>💬 SecretTalk</h1>
 
 
-<p>
+<h3>
 Anonymous conversations made simple
+</h3>
+
+
+<p>
+Share your thoughts privately, receive anonymous messages,
+and continue meaningful conversations.
 </p>
 
 
-<br>
+
+<div class="heart">
+
+❤️
+
+</div>
+
 
 
 <button onclick="goSignup()">
+
 Create Account
+
 </button>
 
-
-<br><br>
 
 
 <button onclick="goLogin()">
+
 Login
+
 </button>
 
 
-<br><br>
+
+<div class="divider"></div>
+
 
 
 <p>
-Already have a SecretTalk link?
+
+Already have someone's SecretTalk link?
+
 </p>
 
 
 <button onclick="goSend()">
-Send Anonymous Message
+
+💌 Send Anonymous Message
+
 </button>
 
 
+
 </div>
+
+
 
 
 
@@ -66,7 +89,7 @@ Send Anonymous Message
 
 function goSignup(){
 
-window.location.href = "signup.html";
+window.location.href="signup.html";
 
 }
 
@@ -74,7 +97,7 @@ window.location.href = "signup.html";
 
 function goLogin(){
 
-window.location.href = "login.html";
+window.location.href="login.html";
 
 }
 
@@ -82,12 +105,13 @@ window.location.href = "login.html";
 
 function goSend(){
 
-window.location.href = "index.html";
+window.location.href="send.html";
 
 }
 
 
 </script>
+
 
 
 </body>
