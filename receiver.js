@@ -43,7 +43,7 @@ const link =
 
 window.location.origin +
 
-"/SecretTalk/send.html?user=" +
+"/SecretTalk/?user=" +
 
 encodeURIComponent(username);
 
