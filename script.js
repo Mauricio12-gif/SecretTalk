@@ -13,143 +13,243 @@ import {
 
 const params = new URLSearchParams(window.location.search);
 
-const receiver = params.get("user") || "Mauricio";
-// CREATE ANONYMOUS ID
-
-let anonymousId = localStorage.getItem("anonymousId");
-let conversationId = localStorage.getItem("conversationId");
+const receiver = params.get("user");
 
 
-if(!conversationId){
 
-conversationId =
-Date.now().toString();
+if(!receiver){
 
+document.getElementById("status").innerHTML =
+"Invalid SecretTalk link ❌";
 
-localStorage.setItem(
-"conversationId",
-conversationId
-);
+throw new Error("No receiver found");
 
 }
 
 
-console.log("Conversation:", conversationId);
 
 
-if(!anonymousId){
+
+// CREATE UNIQUE SESSION PER RECEIVER
+
+const sessionKey = 
+"secretTalk_" + receiver;
+
+
+
+let session =
+JSON.parse(localStorage.getItem(sessionKey));
+
+
+
+let anonymousId;
+let conversationId;
+
+
+
+if(session){
+
+
+anonymousId = session.anonymousId;
+
+conversationId = session.conversationId;
+
+
+}
+else{
+
 
 anonymousId =
 "Anonymous #" +
 Math.floor(1000 + Math.random() * 9000);
 
 
+
+conversationId =
+Date.now().toString();
+
+
+
+session = {
+
+anonymousId: anonymousId,
+
+conversationId: conversationId
+
+};
+
+
+
 localStorage.setItem(
-"anonymousId",
-anonymousId
+
+sessionKey,
+
+JSON.stringify(session)
+
 );
+
 
 }
 
 
-console.log("Anonymous identity:", anonymousId);
+
+
+console.log("Anonymous:", anonymousId);
+
+console.log("Conversation:", conversationId);
 
 
 
-const receiverName = document.getElementById("receiverName");
+
+
+
+
+
+// SHOW RECEIVER NAME
+
+
+const receiverName =
+document.getElementById("receiverName");
+
 
 
 if(receiverName){
 
-    receiverName.innerHTML =
-    "Send " + receiver + " an anonymous message";
+
+receiverName.innerHTML =
+
+"Send " + receiver + " an anonymous message";
+
 
 }
+
+
+
+
 
 
 
 
 // SEND MESSAGE
 
+
 window.sendMessage = async function(){
 
 
-    const messageBox = document.getElementById("message");
 
-    const status = document.getElementById("status");
-
-
-    const message = messageBox.value.trim();
+const messageBox =
+document.getElementById("message");
 
 
 
-    if(message === ""){
-
-        alert("Write a message first");
-
-        return;
-
-    }
+const status =
+document.getElementById("status");
 
 
 
-    try{
+const message =
+messageBox.value.trim();
 
 
-        await addDoc(
 
-            collection(db,"messages"),
 
-       {
+
+if(message === ""){
+
+
+alert("Write a message first");
+
+
+return;
+
+
+}
+
+
+
+
+
+try{
+
+
+
+await addDoc(
+
+collection(db,"messages"),
+
+
+{
+
+
 text: message,
+
 
 sender: anonymousId,
 
+
 receiver: receiver,
+
 
 anonymousId: anonymousId,
 
+
 conversationId: conversationId,
+
 
 time: serverTimestamp()
 
-       }
 
-        );
-
+}
 
 
-        status.innerHTML =
+);
+
+
+
+
+
+status.innerHTML =
+
 
 "Message sent ❤️ <br><br>" +
 
+
 `
+
 <button onclick="continueChat()">
+
 Continue chatting
+
 </button>
+
 `;
 
 
-messageBox.value = "";
 
 
-        console.log("Message saved");
+
+messageBox.value="";
 
 
-    }
+
+}
 
 
-    catch(error){
+
+catch(error){
 
 
-        console.log(error);
+
+console.log(error);
 
 
-        status.innerHTML =
-        "Failed to send ❌";
+
+status.innerHTML =
+"Failed to send ❌";
 
 
-    }
+}
+
 
 
 };
@@ -158,86 +258,64 @@ messageBox.value = "";
 
 
 
-// CREATE SECRET TALK LINK
-
-window.createLink = function(){
-
-
-    const username = document
-    .getElementById("username")
-    .value
-    .trim();
 
 
 
-    const result = document
-    .getElementById("result");
+
+// CONTINUE CHAT
 
 
-
-    if(username === ""){
-
-
-        result.innerHTML =
-        "Enter a username first";
-
-
-        return;
-
-    }
-
-
-
-    const link =
-
-    window.location.origin +
-
-    "/SecretTalk/?user=" +
-
-    encodeURIComponent(username);
-
-
-
-    result.innerHTML = `
-
-    Your SecretTalk link:
-
-    <br><br>
-
-    <a href="${link}">
-    ${link}
-    </a>
-
-    `;
-
-
-};
 window.continueChat = function(){
 
+
+
 window.location.href =
+
 
 "chat.html?conversation="
 
 + conversationId
 
+
 + "&anonymous="
 
 + encodeURIComponent(anonymousId)
+
 
 + "&user="
 
 + encodeURIComponent(receiver)
 
+
 + "&mode=anonymous";
 
+
+
 };
+
+
+
+
+
+
+
+
+
+// SERVICE WORKER
+
+
 if ("serviceWorker" in navigator) {
 
+
 navigator.serviceWorker.register("service-worker.js")
+
 .then(()=>{
+
 
 console.log("SecretTalk app ready");
 
+
 });
+
 
 }
