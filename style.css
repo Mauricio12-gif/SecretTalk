@@ -227,3 +227,56 @@ small{
     color:#999;
 
 }
+.home-card h3{
+
+color:#9b4dca;
+
+}
+
+
+.heart{
+
+font-size:45px;
+
+margin:20px;
+
+animation:pulse 2s infinite;
+
+}
+
+
+.divider{
+
+height:1px;
+
+background:#f3d0e3;
+
+margin:25px 0;
+
+}
+
+
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.15);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
